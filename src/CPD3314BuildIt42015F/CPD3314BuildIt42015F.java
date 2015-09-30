@@ -5,6 +5,12 @@
  */
 package CPD3314BuildIt42015F;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -16,7 +22,7 @@ public class CPD3314BuildIt42015F {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // Celsius/Fahrenheit/Kelvin Example
         double C = 0, F = C * 9 / 5 + 32, K = C + 273.15;
         System.out.printf("%10s%10s%10s\n", "C", "F", "K");
@@ -62,6 +68,7 @@ public class CPD3314BuildIt42015F {
         do {
             System.out.println("Enter a Number 1-10");
             guess = kb.nextInt();
+            kb.nextLine(); // Clears NewLine character from buffer
             if (guess < 1 || guess > 10) {
                 System.out.println("Please enter a number 1-10.");
             }
@@ -94,7 +101,53 @@ public class CPD3314BuildIt42015F {
         for (int i = 0; i <= 1000; i++) {
             sum += i;
         }
-        System.out.println(sum / 1000);        
+        System.out.println(sum / 1000);
+
+        // Mimic Program
+        String input;
+        do {
+            System.out.println("Enter Some Text ('exit' to exit):");
+            input = kb.nextLine();
+            System.out.println(input);
+        } while (!input.equals("exit"));
+
+        // Multiplication Table
+        for (int x1 = 0; x1 < 10; x1++) {
+            for (int y1 = 0; y1 < 10; y1++) {
+                System.out.print((x1 * y1) + "\t");
+            }
+            System.out.println("");
+        }
+        
+        // Sample File Input/Output
+        FileWriter file = new FileWriter("out.txt", true);
+        PrintWriter out = new PrintWriter(file);
+        out.println("Hello World!");
+        out.println("I can write as much as I want between opening and closing the file.");
+        out.close();
+        
+        out = new PrintWriter(file);
+        out.println("Second Running.");
+        out.close();
+        
+        File f = new File("in.txt");
+        Scanner inFile = new Scanner(f);
+        System.out.println(inFile.nextLine());
+        inFile.close();
+        
+        // Sample Random Numbers
+        Random rng = new Random();
+        System.out.println(rng.nextInt());
+        System.out.println(rng.nextDouble());
+        System.out.println(rng.nextInt(10));
+        
+        // Random String Example
+        PrintWriter outFile = new PrintWriter("random.txt");
+        for (int i = 0; i < 100; i++) {
+            outFile.print((char)(rng.nextInt(126-32) + 32));
+        }
+        outFile.println();
+        outFile.close();
     }
 
 }
